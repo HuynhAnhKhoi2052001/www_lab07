@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<a href="/customers/show-add-form" class="btn btn-success">ADD</a>
+<table border="1">
+    <tr>
+        <th>Id</th>
+        <th>Address</th>
+        <th>Email</th>
+        <th>Cusname</th>
+        <th>Phone</th>
+    </tr>
+    <tr th:each="customer:${customerPage}">
+        <td th:text="${customer.id}"></td>
+        <td th:text="${customer.address}"></td>
+        <td th:text="${customer.email}"></td>
+        <td th:text="${customer.name}"></td>
+        <td th:text="${customer.phone}"></td>
+        <td>
+            <a th:href="@{customers/show-edit-form/{id} (id=${customer.id})}">edit </a>|
+            <a th:href="@{customers/delete/{id} (id=${customer.id})}">delete </a>
+        </td>
+    </tr>
+</table>
+</body>
+</html>

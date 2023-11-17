@@ -11,10 +11,15 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
+
 @Controller
 public class CustomerController {
     @Autowired
     private CustomerRepository customerRepository;
+    @GetMapping("homes")
+    public String homePage() {
+        return "admin/customer/home";
+    }
 
     @GetMapping("/customers")
     private String showCustomerList(Model model) {
@@ -39,6 +44,7 @@ public class CustomerController {
         customerRepository.save(customer);
         return "redirect:/customers";
     }
+
     //delete
     @GetMapping("/customers/delete/{id}")
     public String deleteCustomer(@PathVariable("id") long id) {
@@ -46,6 +52,7 @@ public class CustomerController {
         customerRepository.delete(customer);
         return "redirect:/customers";
     }
+
     //show form edit
     @GetMapping("/customers/show-edit-form/{id}")
     public String showUpdateForm(@PathVariable("id") long id, Model model) {
@@ -53,6 +60,7 @@ public class CustomerController {
         model.addAttribute("customerUpdate", customer);
         return "admin/customer/update"; // Trả về view hiển thị form cập nhật thông tin khách hàng
     }
+
     //update
     @PostMapping("/customers/update/{id}")
     public String updateCustomer(@PathVariable("id") long id,
@@ -63,6 +71,7 @@ public class CustomerController {
             customer.setEmail(updatedCustomer.getEmail());
             customer.setAddress(updatedCustomer.getAddress());
             customer.setPhone(updatedCustomer.getPhone());
+
             customerRepository.save(customer);
         }
         return "redirect:/customers";

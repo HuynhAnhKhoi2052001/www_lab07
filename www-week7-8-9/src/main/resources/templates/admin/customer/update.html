@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Update Customer</title>
+</head>
+<body>
+<h1>UPDATE CUSTOMER</h1>
+<form th:action="@{/customers/update/{id}(id=${customerUpdate.id})}" th:object="${customerUpdate}" method="post">
+    <input type="hidden" th:field="*{id}">
+    <label for="name">Name:</label>
+    <input class="form-control" placeholder="Nhap ten" id="name" th:field="*{name}">
+    <label for="email">Email:</label>
+    <input class="form-control" placeholder="Nhap email" id="email" th:field="*{email}">
+    <label for="diachi">Address:</label>
+    <input class="form-control" placeholder="Nhap diachi" id="diachi" th:field="*{address}">
+    <label for="sdt">Phone:</label>
+    <input class="form-control" placeholder="Nhap sdt" id="sdt" th:field="*{phone}">
+    <button type="submit" class="btn btn-primary">Update</button>
+</form>
+</body>
+</html>
