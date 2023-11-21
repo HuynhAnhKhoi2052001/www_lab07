@@ -16,9 +16,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 public class CustomerController {
     @Autowired
     private CustomerRepository customerRepository;
+
     @GetMapping("homes")
     public String homePage() {
-        return "admin/customer/home";
+        return "admin/home/home";
     }
 
     @GetMapping("/customers")

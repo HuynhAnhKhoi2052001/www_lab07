@@ -7,15 +7,15 @@
 <body>
 <h1>UPDATE CUSTOMER</h1>
 <form th:action="@{/customers/update/{id}(id=${customerUpdate.id})}" th:object="${customerUpdate}" method="post">
-    <input type="hidden" th:field="*{id}">
+    <input type="hidden" th:field="*{id}"></br>
     <label for="name">Name:</label>
-    <input class="form-control" placeholder="Nhap ten" id="name" th:field="*{name}">
+    <input class="form-control" placeholder="Nhap ten" id="name" th:field="*{name}"></br>
     <label for="email">Email:</label>
-    <input class="form-control" placeholder="Nhap email" id="email" th:field="*{email}">
+    <input class="form-control" placeholder="Nhap email" id="email" th:field="*{email}"></br>
     <label for="diachi">Address:</label>
-    <input class="form-control" placeholder="Nhap diachi" id="diachi" th:field="*{address}">
+    <input class="form-control" placeholder="Nhap dia chi" id="diachi" th:field="*{address}"></br>
     <label for="sdt">Phone:</label>
-    <input class="form-control" placeholder="Nhap sdt" id="sdt" th:field="*{phone}">
+    <input class="form-control" placeholder="Nhap sdt" id="sdt" th:field="*{phone}"></br>
     <button type="submit" class="btn btn-primary">Update</button>
 </form>
 </body>

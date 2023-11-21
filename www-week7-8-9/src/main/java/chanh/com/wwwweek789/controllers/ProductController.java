@@ -28,28 +28,21 @@ public class ProductController {
     private ProductServices productServices;
 
     @GetMapping("/products")
-    private String showCustomerList(
+    private String showProductList(
             HttpSession session,
             Model model,
-            @RequestParam("page") Optional<Integer> page,
-            @RequestParam("size") Optional<Integer> size) {
-        int currentPage = page.orElse(1);
-        int pageSize = size.orElse(10);
-        Page<Product> productPage = productServices.findPaginate(currentPage - 1,
-                pageSize, "name", "asc");
-
+            @RequestParam(defaultValue = "1") int page,
+            @RequestParam(defaultValue = "10") int size) {
+        Page<Product> productPage = productServices.findPaginate(page - 1, size, "name", "asc");
         model.addAttribute("productPage", productPage);
-
-        int totalPages = productPage.getTotalPages();
-        if (totalPages > 0) {
-            List<Integer> pageNumbers = IntStream.rangeClosed(1, totalPages)
+        if (productPage.getTotalPages() > 0) {
+            model.addAttribute("pageNumbers", IntStream.rangeClosed(1, productPage.getTotalPages())
                     .boxed()
-                    .collect(Collectors.toList());
-            model.addAttribute("pageNumbers", pageNumbers);
+                    .collect(Collectors.toList()));
         }
-        //tra ve trang web
         return "admin/product/list";
     }
+
 
     //show form add
     @GetMapping("/products/show-add-form")
@@ -59,7 +52,6 @@ public class ProductController {
         model.addAttribute("statuses", ProductStatus.values());
         return "admin/product/add";
     }
-
     //add
     @PostMapping("/products/add")
     public String addProduct(
@@ -118,7 +110,6 @@ public class ProductController {
         if (cart.get(product.getProduct_id()) != null) ;
         item.setAmount(item.getAmount() + 1);
         cart.put(product.getProduct_id(), item);
-
         session.setAttribute("items", cart);
         session.setAttribute("itemsOnCart", cart.size());
         return "redirect:/products";
